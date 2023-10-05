@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import UpdateEmployeeModel from "./UpdateEmployeeModel";
-import {
-  getEmployees,
-  deleteEmployee,
-  addEmployee,
-} from "../services/EmployeeService";
+import "./style.css";
+import { getEmployees, addEmployee } from "../services/EmployeeService";
+
+import ShowEmployee from "./ShowEmployee";
 
 const Home = () => {
   const [employees, setEmployees] = useState([]);
@@ -13,67 +11,41 @@ const Home = () => {
   const [addModalShow, setAddModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
   const [editEmployee, setEditEmployee] = useState([]);
-
-  // render home component when first time it's mounte & when isUpdated & employees are changed
-  useEffect(() => {
-    getEmployees().then((data) => {
-      setEmployees(data);
-    });
-  }, [isUpdated, employees]);
-
-  // handle delete request
-  const handleDelete = (e, employeeId) => {
-    e.preventDefault();
-
-    if (window.confirm("Are you sure ?")) {
-      // delete data through api calling by EmployeeServie.js
-      deleteEmployee(employeeId).then(
-        (result) => {
-          alert(result);
-          setIsUpdated(true);
-        },
-        (error) => {
-          alert("Failed to Delete Employee");
-        }
-      );
-    }
-  };
-
-  // add employee state
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-
-
-  // handle when from input value changed
-  const handleInputChange = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setNewEmployee({
-      ...newEmployee,
-      [name]: value,
+  const getEmployeeData = () => {
+    getEmployees().then((data) => {
+      setEmployees(data);
     });
   };
 
+  useEffect(() => {
+    getEmployeeData();
+  }, [isUpdated]);
 
-  
-  // handle add functionalities
+  const handleInputChange = (e) => {
+    e.preventDefault();
+    setNewEmployee({
+      ...newEmployee,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleAddEmployee = (e) => {
     e.preventDefault();
-
-    // call api for adding to the backend from EmployeeService.js
+    if (!newEmployee.name || !newEmployee.email || !newEmployee.password) {
+      alert("Please fill in all fields.");
+      return;
+    }
     addEmployee(newEmployee)
       .then((response) => {
-        // Append the new employee to the existing employees array
         setEmployees([...employees, response]);
-
         alert("Employee added successfully!");
-        setIsUpdated(true); // Trigger data update by setting 'isUpdated' to true
-
-        // Reset the form fields, when data is submited
+        setIsUpdated(true);
         setNewEmployee({
           name: "",
           email: "",
@@ -86,119 +58,79 @@ const Home = () => {
       });
   };
 
-  //handle data update
-  const handleUpdate = (e, emp) => {
-    e.preventDefault();
-    setEditModalShow(true);
-    setEditEmployee(emp);
-  };
-
   let AddModelClose = () => setAddModalShow(false);
-  let EditModelClose = () => setEditModalShow(false);
 
   return (
-    <div className="container-fluid">
-      <h2
-        className="text-center bg-success mt-4 mb-4"
-        style={{ height: "50px" }}
-      >
-        Employees List
-      </h2>
-
-      {/* form to adding data */}
-      <div className="container mt-4">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <form onSubmit={handleAddEmployee}>
-              <div className="form-group">
-                <label>Name:</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={newEmployee.name}
-                  onChange={handleInputChange}
-                  className="form-control mt-2 mb-2"
-                />
-              </div>
-              <div className="form-group">
-                <label>Email:</label>
-                <input
-                  type="text"
-                  name="email"
-                  value={newEmployee.email}
-                  onChange={handleInputChange}
-                  className="form-control mt-2 mb-2"
-                />
-              </div>
-              <div className="form-group">
-                <label>Password:</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={newEmployee.password}
-                  onChange={handleInputChange}
-                  className="form-control mt-2 mb-2"
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary btn-block mb-5"
-                style={{ width: "100%" }}
-              >
-                Add Employee
-              </button>
-            </form>
+    <div>
+      <div>
+      <h1 className="header">Crud with React and DRF</h1>
+      
+      </div>
+      <div className="login_form_container">
+        <form onSubmit={handleAddEmployee} className="login_form">
+          <h2>Employees Entry Form</h2>
+          <div className="input_group">
+            <i className="fa fa-user"></i>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autoComplete="off"
+              value={newEmployee.name}
+              placeholder="write your name"
+              className="input_text"
+              onChange={handleInputChange}
+            />
           </div>
-        </div>
+          <div className="input_group">
+            <i className="fa fa-envelope"></i>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              autoComplete="off"
+              value={newEmployee.email}
+              placeholder="write your email"
+              className="input_text"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="input_group">
+            <i className="fa fa-unlock-alt"></i>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autoComplete="off"
+              className="input_text"
+              value={newEmployee.password}
+              placeholder="write your password"
+              onChange={handleInputChange}
+            />
+          </div>
+          <button type="submit" id="login_button">
+            <a>Add Employee</a>
+          </button>
+          <div className="footer">
+            <p>This Is</p>
+            <p>Amazing</p>
+          </div>
+        </form>
       </div>
 
-
-
-      {/* show data */}
-      <table className="table table-dark table-bordered table-striped">
-        <thead>
-          <tr className="text-center">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Actions</th> {/* Add a new column for buttons */}
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((emp, index) => (
-            <tr key={emp.id} className="text-center">
-              <td>{index + 1}</td>
-              <td>{emp.name}</td>
-              <td>{emp.email}</td>
-              <td>{emp.password}</td>
-              <td>
-                <button
-                  className="btn btn-primary"
-                  style={{ marginRight: "10px" }}
-                  onClick={(event) => handleUpdate(event, emp)}
-                >
-                  Update
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={(event) => handleDelete(event, emp.employeeId)}
-                >
-                  Delete
-                </button>
-                <UpdateEmployeeModel
-                  show={editModalShow}
-                  employee={editEmployee}
-                  setUpdated={setIsUpdated}
-                  onHide={EditModelClose}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ShowEmployee
+        getEmployeeData={getEmployeeData}
+        setIsUpdated={setIsUpdated}
+        setEditModalShow={setEditModalShow}
+        setEditEmployee={setEditEmployee}
+        editModalShow={editModalShow}
+        editEmployee={editEmployee}
+        emp={employees}
+      />
     </div>
   );
 };
 
 export default Home;
+
+

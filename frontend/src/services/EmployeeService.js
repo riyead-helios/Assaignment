@@ -1,12 +1,17 @@
 import axios from 'axios';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
+
+
 export function getEmployees() {
-  return axios.get('http://127.0.0.1:8000/employees/')
+  return axios.get(apiUrl)
     .then(response => response.data)
 }
 
+
 export function deleteEmployee(employeeId) {
-  return axios.delete('http://127.0.0.1:8000/employees/' + employeeId + '/', {
+  return axios.delete(apiUrl + employeeId + '/', {
    method: 'DELETE',
    headers: {
      'Accept':'application/json',
@@ -16,9 +21,9 @@ export function deleteEmployee(employeeId) {
   .then(response => response.data)
 }
 
+
 export function addEmployee(newEmployeeData){
-  console.log(newEmployeeData)
-  return axios.post('http://127.0.0.1:8000/employees/', {
+  return axios.post(apiUrl, {
     employeeId:null,
     name:newEmployeeData.name,
     email:newEmployeeData.email,
@@ -28,10 +33,9 @@ export function addEmployee(newEmployeeData){
     
 }
 
+
 export function updateEmployee(employeeId, employee) {
-  console.log(employee);
-  return axios.put('http://127.0.0.1:8000/employees/' + employeeId + '/', {
-    
+  return axios.put(apiUrl + employeeId + '/', {
     name:employee.name,
     email:employee.email,
     password:employee.password,
