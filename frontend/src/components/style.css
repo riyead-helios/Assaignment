@@ -567,3 +567,45 @@ td button {
   border-radius: 5px;
   background-color: #f0f8ff;
 }
+
+
+/* Project.css */
+
+.project-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: black;
+  margin-top: 50px;
+}
+
+.employee-details {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 50vw;
+}
+
+.employee-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom: 1px dotted black;
+}
+
+.employee-details p {
+  font-size: 16px;
+  margin: 15px 0;
+  color: #04420c;
+  font-size: 20px;
+}
+
+.employee-details p > .fa {
+  color: #00ccff;
+  margin-right: 40px;
+}
+
+.link {
+  text-decoration: none;
+}

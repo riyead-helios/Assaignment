@@ -1,28 +1,26 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 // import { ReactComponent as Hamburger } from '../../assets/icons/hamburger.svg'
 // import { ReactComponent as Brand } from '../../assets/icons/logo.svg'
-import './navbar.css';
-
+import "./navbar.css";
 
 const Navbar = () => {
-  const [showNavbar, setShowNavbar] = useState(false)
+  const [showNavbar, setShowNavbar] = useState(false);
 
   const handleShowNavbar = () => {
-    setShowNavbar(!showNavbar)
-  }
+    setShowNavbar(!showNavbar);
+  };
 
   return (
     <nav className="navbar">
       <div className="containers">
         <div className="logo">
-        <i className="fa-solid fa-helicopter"></i>
-        
+          <i className="fa-solid fa-helicopter"></i>
         </div>
         <div className="menu-icon" onClick={handleShowNavbar}>
-        <i className="fa-solid fa-bars"></i>
+          <i className="fa-solid fa-bars"></i>
         </div>
-        <div className={`nav-elements  ${showNavbar && 'active'}`}>
+        <div className={`nav-elements  ${showNavbar && "active"}`}>
           <ul>
             <li>
               <NavLink to="/">Home</NavLink>
@@ -31,7 +29,7 @@ const Navbar = () => {
               <NavLink to="/blog">Blog</NavLink>
             </li>
             <li>
-              <NavLink to="/projects">Projects</NavLink>
+              <NavLink to="/Details">Details</NavLink>
             </li>
             <li>
               <NavLink to="/about">About</NavLink>
@@ -43,7 +41,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

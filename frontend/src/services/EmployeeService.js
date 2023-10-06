@@ -10,6 +10,13 @@ export function getEmployees() {
 }
 
 
+
+export function getEmployee(employeeId) {
+  return axios.get(apiUrl + employeeId + '/')
+    .then(response => response.data)
+}
+
+
 export function deleteEmployee(employeeId) {
   return axios.delete(apiUrl + employeeId + '/', {
    method: 'DELETE',

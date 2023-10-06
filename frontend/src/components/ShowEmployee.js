@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 import UpdateEmployeeModel from "./UpdateEmployeeModel";
 import { deleteEmployee } from "../services/EmployeeService";
@@ -36,47 +37,51 @@ const ShowEmployee = ({
   };
 
   return (
-    <><h2 className="edh">Employees Details Table</h2><div className="table">
-
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {emp.map((emp, index) => (
-            <tr key={emp.employeeId}>
-              <td>{index + 1}</td>
-              <td>{emp.name}</td>
-              <td>{emp.email}</td>
-              <td>{emp.password}</td>
-              <td>
-                <button onClick={(event) => handleUpdate(event, emp)}>
-                  <i className="fa fa-edit"></i>
-                </button>
-
-                <button onClick={(e) => handleDelete(e, emp.employeeId)}>
-                  <i className="fa fa-trash"></i>
-                </button>
-                <UpdateEmployeeModel
-                  getEmployeeData={getEmployeeData}
-                  setIsUpdated={setIsUpdated}
-                  setEditModalShow={setEditModalShow}
-                  setEditEmployee={setEditEmployee}
-                  editModalShow={editModalShow}
-                  editEmployee={editEmployee}
-                  emp={emp} />
-              </td>
+    <>
+      <h2 className="edh">Employees Details Table</h2>
+      <div className="table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div></>
+          </thead>
+          <tbody>
+            {emp.map((emp, index) => (
+              <tr key={emp.employeeId}>
+                <td>{index + 1}</td>
+                <td>{emp.name}</td>
+                <td>{emp.email}</td>
+                <td>{emp.password}</td>
+                <td>
+                  <button onClick={(event) => handleUpdate(event, emp)}>
+                    <i className="fa fa-edit"></i>
+                  </button>
+
+                  <button onClick={(e) => handleDelete(e, emp.employeeId)}>
+                    <i className="fa fa-trash"></i>
+                  </button>
+                  <Link className="link" to={`/Details/${emp.employeeId}`}><i class="fa fa-solid fa-circle-info"></i></Link>
+                  <UpdateEmployeeModel
+                    getEmployeeData={getEmployeeData}
+                    setIsUpdated={setIsUpdated}
+                    setEditModalShow={setEditModalShow}
+                    setEditEmployee={setEditEmployee}
+                    editModalShow={editModalShow}
+                    editEmployee={editEmployee}
+                    emp={emp}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
