@@ -19,7 +19,7 @@ const Details = () => {
 
   return (
     <>
-      <div style={{ color: "black" }}>
+      <div style={{ color: 'red' }}>
         <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
           This is Details Page
         </h1>
