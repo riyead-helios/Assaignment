@@ -65,7 +65,7 @@ const ShowEmployee = ({
                   <button onClick={(e) => handleDelete(e, emp.employeeId)}>
                     <i className="fa fa-trash"></i>
                   </button>
-                  <Link className="link" to={`/details/${emp.employeeId}`}><i className="fa fa-solid fa-circle-info"></i></Link>
+                  <Link className="link" to={`/details/${emp.employeeId}/`}><i className="fa fa-solid fa-circle-info"></i></Link>
                   <UpdateEmployeeModel
                     getEmployeeData={getEmployeeData}
                     setIsUpdated={setIsUpdated}
