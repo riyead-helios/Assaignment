@@ -36,8 +36,8 @@ const ShowEmployee = ({
   };
 
   return (
-    <div>
-      <h2 className="edh">Employees Details Table</h2>
+    <><h2 className="edh">Employees Details Table</h2><div className="table">
+
       <table>
         <thead>
           <tr>
@@ -57,11 +57,11 @@ const ShowEmployee = ({
               <td>{emp.password}</td>
               <td>
                 <button onClick={(event) => handleUpdate(event, emp)}>
-                <i className="fa fa-edit"></i>
+                  <i className="fa fa-edit"></i>
                 </button>
 
                 <button onClick={(e) => handleDelete(e, emp.employeeId)}>
-                <i className="fa fa-trash"></i>
+                  <i className="fa fa-trash"></i>
                 </button>
                 <UpdateEmployeeModel
                   getEmployeeData={getEmployeeData}
@@ -70,14 +70,13 @@ const ShowEmployee = ({
                   setEditEmployee={setEditEmployee}
                   editModalShow={editModalShow}
                   editEmployee={editEmployee}
-                  emp={emp}
-                />
+                  emp={emp} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
+    </div></>
   );
 };
 

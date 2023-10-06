@@ -31,7 +31,7 @@ const UpdateEmployeeModel = ({
             <div className="modal-header">
               <h5 className="modal-title">Update Employee Information</h5>
               <button
-                className="modal-close"
+                className="modal_close"
                 onClick={() => setEditModalShow(false)}
               >
                 &times;
@@ -64,7 +64,7 @@ const UpdateEmployeeModel = ({
                   />
                 </div>
                 <div>
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email" className="label">Email</label>
                   <input
                     type="text"
                     id="email"
@@ -75,7 +75,7 @@ const UpdateEmployeeModel = ({
                   />
                 </div>
                 <div>
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password" className="label">Password</label>
                   <input
                     type="text"
                     id="password"

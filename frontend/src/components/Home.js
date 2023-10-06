@@ -68,7 +68,7 @@ const Home = () => {
       </div>
       <div className="login_form_container">
         <form onSubmit={handleAddEmployee} className="login_form">
-          <h2>Employees Entry Form</h2>
+          {/* <h2>Employees Entry Form</h2> */}
           <div className="input_group">
             <i className="fa fa-user"></i>
             <input

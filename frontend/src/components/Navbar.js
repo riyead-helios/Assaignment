@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="container">
+      <div className="containers">
         <div className="logo">
         <i className="fa-solid fa-helicopter"></i>
         
